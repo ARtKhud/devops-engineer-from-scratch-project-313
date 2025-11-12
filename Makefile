@@ -3,3 +3,12 @@ start-dev:
 
 install:
 	uv sync
+
+fix-lint:
+	uv run ruff check . --fix
+
+lint:
+	uv run ruff check
+
+test:
+	uv run pytest tests

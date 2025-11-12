@@ -1,6 +1,8 @@
+import logging
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-import logging
+
 app = FastAPI()
 
 origins = [
@@ -22,9 +24,11 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
+
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
+
 
 @app.get("/ping")
 async def get_pong():
