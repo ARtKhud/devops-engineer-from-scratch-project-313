@@ -5,8 +5,6 @@ import sentry_sdk
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-
-
 SENTRY_DSN = os.getenv('SENTRY_DSN')
 
 sentry_sdk.init(dsn=SENTRY_DSN,
