@@ -1,7 +1,17 @@
 import logging
+import os
 
+import sentry_sdk
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+
+
+
+SENTRY_DSN = os.getenv('SENTRY_DSN')
+
+sentry_sdk.init(dsn=SENTRY_DSN,
+    traces_sample_rate=1.0,
+    send_default_pii=True,)
 
 app = FastAPI()
 
@@ -34,3 +44,8 @@ async def root():
 async def get_pong():
     logger.info('Кто то запросил "ping"')
     return "pong"
+
+
+@app.get("/sentry-debug")
+async def trigger_error():
+    division_by_zero = 1 / 0

@@ -1,8 +1,8 @@
 start-dev:
-	uv run fastapi dev --host 0.0.0.0 --port 8080
+	uv run fastapi dev --host 0.0.0.0 --port 8080 
 
 install:
-	uv sync
+	uv sync --no-dev
 
 fix-lint:
 	uv run ruff check . --fix
@@ -12,3 +12,6 @@ lint:
 
 test:
 	uv run pytest tests
+
+install-dev:
+	uv sync 
