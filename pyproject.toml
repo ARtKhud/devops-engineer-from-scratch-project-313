@@ -6,13 +6,16 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "fastapi[standard]>=0.121.1",
+    "psycopg2-binary>=2.9.11",
     "sentry-sdk[fastapi]>=2.44.0",
+    "sqlmodel>=0.0.27",
 ]
 
 [dependency-groups]
 dev = [
     "httpx>=0.28.1",
     "pytest>=9.0.0",
+    "pytest-cov>=7.0.0",
     "python-dotenv>=1.2.1",
     "ruff>=0.14.4",
 ]
@@ -21,4 +24,4 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["tests"]
+packages = ["app", "tests"]
