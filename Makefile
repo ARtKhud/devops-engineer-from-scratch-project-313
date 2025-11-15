@@ -11,7 +11,7 @@ lint:
 	uv run ruff check
 
 test:
-	export ENVIRONMENT=development && uv run pytest tests
+	uv run pytest tests
 
 install-dev:
 	uv sync 
