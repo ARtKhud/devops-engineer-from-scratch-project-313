@@ -16,10 +16,6 @@ sentry_sdk.init(dsn=config.SENTRY_DSN,
     send_default_pii=True,)
 
 
-print(config.os.getenv("DATABASE_URL"))
-print(config.os.getenv("BASE_URL"))
-
-
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     try:
