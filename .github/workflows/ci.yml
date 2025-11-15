@@ -24,3 +24,6 @@ jobs:
               
             - name: Run tests
               run: make test
+              env:
+                  DATABASE_URL: ${{secrets.DATABASE_URL}}
+                  BASE_URL: ${{secrets.BASE_URL}}
