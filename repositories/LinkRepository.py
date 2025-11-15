@@ -1,9 +1,12 @@
+import os
+
 from fastapi import HTTPException
 from sqlmodel import Session, select
-import os
+
 from app.models import Link, LinkCreate
 
 BASE_URL = os.getenv("BASE_URL")
+
 
 class LinkRepository:
     def __init__(self, conn):

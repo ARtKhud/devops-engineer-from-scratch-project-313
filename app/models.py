@@ -1,7 +1,7 @@
-from sqlmodel import Field, SQLModel
 from datetime import datetime
-from sqlalchemy import Column, DateTime, text
-from typing import Optional
+
+from sqlmodel import Field, SQLModel
+
 
 class Link(SQLModel, table=True):
     __tablename__ = "links"
