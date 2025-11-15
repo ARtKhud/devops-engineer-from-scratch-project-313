@@ -9,8 +9,7 @@ DATABASE_URL = add_driver_to_db_url(os.getenv("DATABASE_URL"))
 if not DATABASE_URL:
     raise ValueError("DATABASE_URL environment variable is not set")
 
-print(os.getenv("DATABASE_URL"))
-print(os.getenv("BASE_URL"))
+print(DATABASE_URL)
 
 engine = create_engine(
     DATABASE_URL,
