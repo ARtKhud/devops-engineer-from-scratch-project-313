@@ -69,6 +69,7 @@ def test_get_link_by_id_different_ids():
             assert response.json() == mock_link
             mock_repo.find.assert_called_once_with(link_id)
 
+
 def test_get_links_with_range_query():
     with patch('app.main.repo') as mock_repo:
         mock_links = [{"id": i, "short_name": f"test{i}"} for i in range(5)]

@@ -12,7 +12,7 @@ class LinkRepository:
     def __init__(self, conn):
         self.conn = conn
 
-    def get_content(self, skip:int=0, limit:int=10):
+    def get_content(self, skip: int = 0, limit: int = 10):
         with Session(self.conn) as session:
             statement = select(Link).offset(skip).limit(limit)
             links = session.exec(statement).all()

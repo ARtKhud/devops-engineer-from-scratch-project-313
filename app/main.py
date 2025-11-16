@@ -1,11 +1,11 @@
 import logging
 from contextlib import asynccontextmanager
-import json
+
 import sentry_sdk
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI, Response
 from fastapi.middleware.cors import CORSMiddleware
 from sqlmodel import SQLModel
-from typing import List, Optional
+
 import config
 from repositories.LinkRepository import LinkRepository
 
@@ -75,7 +75,9 @@ async def get_links(response: Response, range: str = None):
         limit = int(end_str.strip()) - skip 
         total_count = repo.get_total_count()
         links = repo.get_content(skip=skip, limit=limit)
-        response.headers["Content-Range"] = f"links {skip}-{limit + skip}/{total_count}"
+        response.headers["Content-Range"] = (
+            f"links {skip}-{limit + skip}/{total_count}"
+        ) 
         return links
     return repo.get_content()
 
