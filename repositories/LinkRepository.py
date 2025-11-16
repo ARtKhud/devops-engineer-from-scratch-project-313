@@ -1,7 +1,7 @@
 import os
 
 from fastapi import HTTPException
-from sqlmodel import Session, select
+from sqlmodel import Session, func, select
 
 from app.models import Link, LinkCreate
 
@@ -12,9 +12,10 @@ class LinkRepository:
     def __init__(self, conn):
         self.conn = conn
 
-    def get_content(self):
+    def get_content(self, skip:int=0, limit:int=10):
         with Session(self.conn) as session:
-            links = session.exec(select(Link)).all()
+            statement = select(Link).offset(skip).limit(limit)
+            links = session.exec(statement).all()
             return links
 
     def find(self, id):
@@ -91,3 +92,9 @@ class LinkRepository:
             session.delete(link)
             session.commit()
             raise HTTPException(status_code=204, detail="No Content")
+        
+    def get_total_count(self) -> int:
+        with Session(self.conn) as session:
+            statement = select(func.count(Link.id))
+            count = session.exec(statement).one()
+            return count

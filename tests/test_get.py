@@ -68,3 +68,28 @@ def test_get_link_by_id_different_ids():
             assert response.status_code == 200
             assert response.json() == mock_link
             mock_repo.find.assert_called_once_with(link_id)
+
+def test_get_links_with_range_query():
+    with patch('app.main.repo') as mock_repo:
+        mock_links = [{"id": i, "short_name": f"test{i}"} for i in range(5)]
+        mock_repo.get_content.return_value = mock_links
+        mock_repo.get_total_count.return_value = 100
+        
+        response = client.get("/api/links?range=[5,9]")
+        
+        assert response.status_code == 200
+        assert "Content-Range" in response.headers
+        assert response.headers["Content-Range"] == "links 5-9/100"
+        mock_repo.get_content.assert_called_once_with(skip=5, limit=4)
+
+
+def test_get_links_default_pagination():
+    with patch('app.main.repo') as mock_repo:
+        mock_links = [{"id": i, "short_name": f"test{i}"} for i in range(10)]
+        mock_repo.get_content.return_value = mock_links
+        mock_repo.get_total_count.return_value = 30
+        
+        response = client.get("/api/links")
+        
+        assert response.status_code == 200
+        mock_repo.get_content.assert_called_once()
