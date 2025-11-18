@@ -31,7 +31,7 @@ app = FastAPI(lifespan=lifespan)
 
 origins = [
     "http://localhost",
-    "http://localhost:8080",
+    "http://localhost:5173",
 ]
 repo = LinkRepository(engine)
 
@@ -39,8 +39,9 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET","POST","PUT", "DELETE"],
     allow_headers=["*"],
+    expose_headers=["Content-Range"]
 )
 logging.basicConfig(
     level=logging.INFO,
@@ -72,11 +73,11 @@ async def get_links(response: Response, range: str = None):
     if range:
         start_str, end_str = range.strip("[]").split(",")
         skip = int(start_str.strip())
-        limit = int(end_str.strip()) - skip 
+        limit = int(end_str.strip()) - skip + 1
         total_count = repo.get_total_count()
         links = repo.get_content(skip=skip, limit=limit)
         response.headers["Content-Range"] = (
-            f"links {skip}-{limit + skip}/{total_count}"
+            f"links {skip}-{limit + skip - 1}/{total_count}"
         ) 
         return links
     return repo.get_content()

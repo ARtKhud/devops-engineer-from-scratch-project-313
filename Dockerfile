@@ -3,7 +3,7 @@ FROM python:3.12-slim
 WORKDIR /app
 
 RUN apt-get update \
-&& apt-get install -y --no-install-recommends curl make \
+&& apt-get install -y --no-install-recommends curl make nginx \
 && apt-get clean \
 && rm -rf /var/lib/apt/lists/*
 
@@ -13,10 +13,18 @@ ENV PATH="/root/.local/bin:${PATH}"
 
 COPY pyproject.toml uv.lock Makefile README.md /app/
 
+
 RUN make install
 
 COPY . /app/
 
-CMD [ "make","start-dev" ]
+RUN mv /app/nginx.conf /etc/nginx/nginx.conf
+
+RUN chmod +x /app/bin/start.sh
+
+EXPOSE 80
+
+CMD ["/app/bin/start.sh"]
+# CMD [ "make","start" ]
 
 

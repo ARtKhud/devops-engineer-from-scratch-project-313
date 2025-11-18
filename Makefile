@@ -15,3 +15,6 @@ test:
 
 install-dev:
 	uv sync 
+
+start:
+	uv run fastapi run --host 0.0.0.0 --port 8080 

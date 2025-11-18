@@ -81,7 +81,7 @@ def test_get_links_with_range_query():
         assert response.status_code == 200
         assert "Content-Range" in response.headers
         assert response.headers["Content-Range"] == "links 5-9/100"
-        mock_repo.get_content.assert_called_once_with(skip=5, limit=4)
+        mock_repo.get_content.assert_called_once_with(skip=5, limit=5)
 
 
 def test_get_links_default_pagination():
