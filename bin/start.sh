@@ -5,7 +5,7 @@ echo "Starting FastAPI application..."
 make start &
 
 # Ждем немного, чтобы FastAPI успел запуститься
-while ! nc -z 127.0.0.1 8080; do
+while ! curl -s http://127.0.0.1:8080/health >/dev/null; do
   sleep 1
 done
 
