@@ -30,8 +30,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 
 origins = [
-    "http://localhost",
-    "http://localhost:5173",
+    "*",
 ]
 repo = LinkRepository(engine)
 
@@ -39,7 +38,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "HEAD"],
+    allow_methods=["*"],
     allow_headers=["*"],
     expose_headers=["Content-Range"]
 )
@@ -104,3 +103,8 @@ async def update_link(id: int, link_data: dict):
 @app.delete("/api/links/{id}")
 async def delete_link(id: int):
     repo.delete(id)
+
+
+@app.get("/health")
+async def get_health():
+    return True
