@@ -1,5 +1,5 @@
 # .dockerignore
-Dockerfile
+# Dockerfile
 .dockerignore
 # Чувствительные данные и конфигурация
 .env
