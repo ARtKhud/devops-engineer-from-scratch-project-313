@@ -3,12 +3,9 @@ FROM python:3.12-slim
 WORKDIR /app
 
 RUN apt-get update \
-&& apt-get install -y --no-install-recommends curl make nginx \
+&& apt-get install -y --no-install-recommends curl make \
 && apt-get clean \
 && rm -rf /var/lib/apt/lists/*
-
-RUN curl -fsSL https://deb.nodesource.com/setup_24.x | sh \
-    && apt-get install -y nodejs
 
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 
@@ -20,13 +17,6 @@ RUN make install
 
 COPY . /app/
 
-RUN mv /app/nginx.conf /etc/nginx/nginx.conf
-
-RUN chmod +x /app/bin/start.sh
-
-EXPOSE 80
-
-CMD ["/app/bin/start.sh"]
-# CMD [ "make","start" ]
+CMD [ "make","start" ]
 
 

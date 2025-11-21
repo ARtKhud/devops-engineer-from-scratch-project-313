@@ -29,10 +29,10 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
+repo = LinkRepository(engine)
 origins = [
     "*",
 ]
-repo = LinkRepository(engine)
 
 app.add_middleware(
     CORSMiddleware,
