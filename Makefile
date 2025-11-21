@@ -2,8 +2,8 @@ start-dev:
 	export ENVIRONMENT=development && uv run fastapi dev --host 0.0.0.0 --port 8080 
 
 install:
-	uv sync --no-dev && npm install @hexlet/project-devops-deploy-crud-frontend
-
+	uv sync --no-dev
+	
 fix-lint:
 	uv run ruff check . --fix
 
