@@ -31,7 +31,7 @@ app = FastAPI(lifespan=lifespan)
 
 repo = LinkRepository(engine)
 origins = [
-    "*",
+    "http://localhost"
 ]
 
 app.add_middleware(
