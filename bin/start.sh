@@ -11,6 +11,10 @@ done
 
 npx start-hexlet-devops-deploy-crud-frontend &
 
+while ! curl -s http://127.0.0.1:5173/health >/dev/null; do
+  sleep 1
+done
+
 # Запускаем nginx на переднем плане
 echo "Starting Nginx..."
 nginx -g "daemon off;"
