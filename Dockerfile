@@ -1,4 +1,4 @@
-FROM python:3.14-slim
+FROM python:3.12-slim
 
 WORKDIR /app
 
@@ -8,7 +8,10 @@ RUN apt-get update \
 && rm -rf /var/lib/apt/lists/*
 
 RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash - \
-    && apt-get install -y nodejs
+    && apt-get install -y --no-install-recommends nodejs \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN npm install @hexlet/project-devops-deploy-crud-frontend
 
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 
