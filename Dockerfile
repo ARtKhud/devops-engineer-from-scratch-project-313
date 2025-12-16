@@ -21,7 +21,7 @@ RUN make install
 
 COPY . /app/
 
-COPY /home/art/node_modules/@hexlet/project-devops-deploy-crud-frontend/dist/ /var/www/html
+COPY frontend/. /app/public/
 
 RUN mv /app/nginx.conf /etc/nginx/nginx.conf
 
