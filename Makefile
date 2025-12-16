@@ -17,4 +17,4 @@ install-dev:
 	uv sync 
 
 run:
-	make install && uv run fastapi run --host 0.0.0.0 --port 8080
+	uv run fastapi run --host 0.0.0.0 --port 8080
