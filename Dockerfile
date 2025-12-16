@@ -1,4 +1,4 @@
-FROM python:3.12-slim
+FROM python:3.14-slim
 
 WORKDIR /app
 
@@ -21,7 +21,7 @@ RUN make install
 
 COPY . /app/
 
-COPY node_modules/@hexlet/project-devops-deploy-crud-frontend/dist/ /var/www/html
+COPY /home/art/node_modules/@hexlet/project-devops-deploy-crud-frontend/dist/ /var/www/html
 
 RUN mv /app/nginx.conf /etc/nginx/nginx.conf
 
