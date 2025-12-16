@@ -1,5 +1,5 @@
-run:
-	uv run fastapi dev --host 0.0.0.0 --port 8080 
+run-dev:
+	export ENVIRONMENT=development && uv run fastapi dev --host 0.0.0.0 --port 8080 
 
 install:
 	uv sync --no-dev
@@ -16,5 +16,5 @@ test:
 install-dev:
 	uv sync 
 
-start:
-	uv run fastapi run --host 0.0.0.0 --port 8081
+run:
+	uv run fastapi run --host 0.0.0.0 --port 8080
