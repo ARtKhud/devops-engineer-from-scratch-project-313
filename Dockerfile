@@ -11,18 +11,17 @@ RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash - \
     && apt-get install -y --no-install-recommends nodejs \
     && rm -rf /var/lib/apt/lists/*
 
-RUN npm install @hexlet/project-devops-deploy-crud-frontend
-
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 
 ENV PATH="/root/.local/bin:${PATH}"
 
 COPY pyproject.toml uv.lock Makefile README.md /app/
 
-
 RUN make install
 
 COPY . /app/
+
+COPY node_modules/@hexlet/project-devops-deploy-crud-frontend/dist/ /var/www/html
 
 RUN mv /app/nginx.conf /etc/nginx/nginx.conf
 
