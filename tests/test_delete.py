@@ -3,7 +3,7 @@ from unittest.mock import patch
 from fastapi import HTTPException
 from fastapi.testclient import TestClient
 
-from app.main import app
+from app.server import app
 
 client = TestClient(app)
 
