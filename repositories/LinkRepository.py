@@ -74,7 +74,7 @@ class LinkRepository:
             link = Link(
                 original_url=link_data["original_url"],
                 short_name=link_data["short_name"],
-                short_url=f"{BASE_URL}{link_data['short_name']}"
+                short_url=f"{BASE_URL}/r/{link_data['short_name']}"
             )
             session.add(link)
             session.commit()

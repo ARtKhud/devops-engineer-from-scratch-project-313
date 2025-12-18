@@ -1,11 +1,12 @@
 import logging
 from contextlib import asynccontextmanager
+from typing import List
 
 import sentry_sdk
 from fastapi import FastAPI, Response, status
 from fastapi.middleware.cors import CORSMiddleware
 from sqlmodel import SQLModel
-from typing import List
+
 import config
 from repositories.LinkRepository import LinkRepository
 
@@ -68,7 +69,9 @@ async def trigger_error():
     division_by_zero = 1 / 0
 
 
-@app.get("/api/links",response_model=List[LinkResponse], status_code=status.HTTP_200_OK)
+@app.get("/api/links",
+        response_model=List[LinkResponse],
+        status_code=status.HTTP_200_OK)
 async def get_links(response: Response, range: str = None):
     if range:
         start_str, end_str = range.strip("[]").split(",")
