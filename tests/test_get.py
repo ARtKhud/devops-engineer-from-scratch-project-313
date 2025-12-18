@@ -22,7 +22,7 @@ def test_get_links():
             "short_url": "https://short.ly/example"
         }
     ]
-    with patch('app.main.repo') as mock_repo:
+    with patch('app.server.repo') as mock_repo:
         mock_repo.get_content.return_value = mock_links
         response = client.get("/api/links")
         assert response.status_code == 200
@@ -39,7 +39,7 @@ def test_get_link_by_id_success():
         "short_url": "https://short.ly/example"
     }
     
-    with patch('app.main.repo') as mock_repo:
+    with patch('app.server.repo') as mock_repo:
         mock_repo.find.return_value = mock_link
         
         response = client.get(f"/api/links/{link_id}")
@@ -60,7 +60,7 @@ def test_get_link_by_id_different_ids():
     ]
     
     for link_id, mock_link in test_cases:
-        with patch('app.main.repo') as mock_repo:
+        with patch('app.server.repo') as mock_repo:
             mock_repo.find.return_value = mock_link
             
             response = client.get(f"/api/links/{link_id}")
@@ -71,7 +71,7 @@ def test_get_link_by_id_different_ids():
 
 
 def test_get_links_with_range_query():
-    with patch('app.main.repo') as mock_repo:
+    with patch('app.server.repo') as mock_repo:
         mock_links = [{"id": i, "short_name": f"test{i}"} for i in range(5)]
         mock_repo.get_content.return_value = mock_links
         mock_repo.get_total_count.return_value = 100
@@ -85,7 +85,7 @@ def test_get_links_with_range_query():
 
 
 def test_get_links_default_pagination():
-    with patch('app.main.repo') as mock_repo:
+    with patch('app.server.repo') as mock_repo:
         mock_links = [{"id": i, "short_name": f"test{i}"} for i in range(10)]
         mock_repo.get_content.return_value = mock_links
         mock_repo.get_total_count.return_value = 30

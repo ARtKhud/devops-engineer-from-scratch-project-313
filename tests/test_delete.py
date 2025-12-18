@@ -11,7 +11,7 @@ client = TestClient(app)
 def test_delete_link_success_204():
     link_id = 1
     
-    with patch('app.main.repo') as mock_repo:
+    with patch('app.server.repo') as mock_repo:
         mock_repo.delete.side_effect = HTTPException(status_code=204,
                                                       detail="No Content")
         
@@ -27,7 +27,7 @@ def test_delete_link_success_204():
 def test_delete_link_not_found_404():
     link_id = 999
     
-    with patch('app.main.repo') as mock_repo:
+    with patch('app.server.repo') as mock_repo:
         mock_repo.delete.side_effect = HTTPException(
             status_code=404, 
             detail="Link not found"
@@ -53,7 +53,7 @@ def test_delete_link_different_ids():
     ]
     
     for link_id, expected_status in test_cases:
-        with patch('app.main.repo') as mock_repo:
+        with patch('app.server.repo') as mock_repo:
             if expected_status == 204:
                 mock_repo.delete.side_effect = HTTPException(status_code=204,
                     detail="No Content")

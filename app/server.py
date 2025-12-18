@@ -2,10 +2,10 @@ import logging
 from contextlib import asynccontextmanager
 
 import sentry_sdk
-from fastapi import FastAPI, Response
+from fastapi import FastAPI, Response, status
 from fastapi.middleware.cors import CORSMiddleware
 from sqlmodel import SQLModel
-
+from .models import LinkCreate 
 import config
 from repositories.LinkRepository import LinkRepository
 
@@ -20,7 +20,7 @@ sentry_sdk.init(dsn=config.SENTRY_DSN,
 async def lifespan(app: FastAPI):
     try:
         SQLModel.metadata.create_all(engine)
-    except Exception as e:
+    except Exception:
         raise
     app.state.engine = engine
     yield 
@@ -67,7 +67,7 @@ async def trigger_error():
     division_by_zero = 1 / 0
 
 
-@app.get("/api/links")
+@app.get("/api/links", status_code=status.HTTP_200_OK)
 async def get_links(response: Response, range: str = None):
     if range:
         start_str, end_str = range.strip("[]").split(",")
@@ -82,9 +82,9 @@ async def get_links(response: Response, range: str = None):
     return repo.get_content()
 
 
-@app.post("/api/links") 
-async def create_link(link_data: dict):
-    link = repo._create(link_data)
+@app.post("/api/links", status_code=status.HTTP_201_CREATED)
+async def create_link(link_data: LinkCreate):
+    link = repo._create(link_data.model_dump())
     return link
 
 
@@ -94,7 +94,7 @@ async def get_link_by_id(id: int):
     return link
 
 
-@app.put("/api/links/{id}")
+@app.put("/api/links/{id}", status_code=status.HTTP_201_CREATED)
 async def update_link(id: int, link_data: dict):
     link = repo._update(id, link_data)
     return link

@@ -20,12 +20,12 @@ def test_create_link_success():
         "short_url": "https://short.ly/google"
     }
     
-    with patch('app.main.repo') as mock_repo:
+    with patch('app.server.repo') as mock_repo:
         mock_repo._create.return_value = expected_response
         
         response = client.post("/api/links", json=request_data)
         
-        assert response.status_code == 200
+        assert response.status_code == 201
         assert response.json() == expected_response
         
         mock_repo._create.assert_called_once_with(request_data)
@@ -44,12 +44,12 @@ def test_create_link_with_short_url():
         "short_url": "https://short.ly/example"  
     }
     
-    with patch('app.main.repo') as mock_repo:
+    with patch('app.server.repo') as mock_repo:
         mock_repo._create.return_value = mock_response
         
         response = client.post("/api/links", json=request_data)
         
-        assert response.status_code == 200
+        assert response.status_code == 201
         assert "short_url" in response.json()
         assert response.json()["short_url"] == "https://short.ly/example"
 
@@ -67,7 +67,7 @@ def test_create_link_returns_correct_structure():
         "short_url": "https://short.ly/test"
     }
     
-    with patch('app.main.repo') as mock_repo:
+    with patch('app.server.repo') as mock_repo:
         mock_repo._create.return_value = mock_response
         
         response = client.post("/api/links", json=request_data)
@@ -82,3 +82,10 @@ def test_create_link_returns_correct_structure():
         assert isinstance(data["original_url"], str)
         assert isinstance(data["short_name"], str)
         assert isinstance(data["short_url"], str)
+
+def test_create_with_invalid_value():
+    request_data = {}
+    with patch('app.server.repo'):
+        response = client.post("/api/links", json=request_data)
+        
+        assert response.status_code == 422

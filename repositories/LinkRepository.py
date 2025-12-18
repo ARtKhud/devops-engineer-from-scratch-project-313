@@ -61,6 +61,9 @@ class LinkRepository:
             return link
 
     def _create(self, link_data: LinkCreate) -> Link:
+        if  not {"short_name", "original_url"}.issubset(link_data):
+            raise HTTPException(status_code=422)
+        
         if self.find_by_short_name(link_data["short_name"]):
             raise HTTPException(
                 status_code=400, 

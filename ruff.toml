@@ -3,7 +3,8 @@ line-length = 80
 [lint.per-file-ignores]
   # init modules can contain the local imports, logic, unused imports
 "__init__.py" = ["F401"]
-"main.py" = ["F841"]
+"server.py" = ["F841"]
+"main.py" = ["F401"]
 
 [lint]
 preview = true
