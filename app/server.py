@@ -65,7 +65,7 @@ async def get_pong():
 
 @app.get("/sentry-debug")
 async def trigger_error():
-    division_by_zero = 1 / 0
+    1 / 0
 
 
 @app.get("/api/links",
