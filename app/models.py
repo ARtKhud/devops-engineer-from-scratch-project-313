@@ -16,3 +16,9 @@ class Link(SQLModel, table=True):
 class LinkCreate(SQLModel):
     original_url: str
     short_name: str
+
+class LinkResponse(SQLModel):
+    id: int
+    original_url: str
+    short_name: str
+    short_url: str
