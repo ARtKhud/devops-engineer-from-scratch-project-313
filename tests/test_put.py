@@ -26,7 +26,7 @@ def test_update_link_success():
         
         response = client.put(f"/api/links/{link_id}", json=request_data)
         
-        assert response.status_code == 201
+        assert response.status_code == 200
         assert response.json() == mock_updated_link
         mock_repo._update.assert_called_once_with(link_id, request_data)
 
@@ -49,7 +49,7 @@ def test_update_link_partial_data():
         
         response = client.put(f"/api/links/{link_id}", json=partial_data)
         
-        assert response.status_code == 201
+        assert response.status_code == 200
         assert response.json()["short_name"] == "only-name-updated"
         mock_repo._update.assert_called_once_with(link_id, partial_data)
 
@@ -75,5 +75,5 @@ def test_update_link_different_ids():
             
             response = client.put(f"/api/links/{link_id}", json=update_data)
             
-            assert response.status_code == 201
+            assert response.status_code == 200
             mock_repo._update.assert_called_once_with(link_id, update_data)

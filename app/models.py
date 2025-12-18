@@ -12,6 +12,9 @@ class Link(SQLModel, table=True):
     short_url: str
     created_at: datetime = Field(default_factory=datetime.now)
     
+    class Config:
+        exclude = {"created_at"}
+    
 
 class LinkCreate(SQLModel):
     original_url: str

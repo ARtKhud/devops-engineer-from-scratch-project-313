@@ -1,6 +1,5 @@
 import logging
 from contextlib import asynccontextmanager
-from typing import List
 
 import sentry_sdk
 from fastapi import FastAPI, Response, status
@@ -11,7 +10,7 @@ import config
 from repositories.LinkRepository import LinkRepository
 
 from .database import engine
-from .models import LinkCreate, LinkResponse
+from .models import LinkCreate
 
 sentry_sdk.init(dsn=config.SENTRY_DSN,
     traces_sample_rate=1.0,
@@ -70,7 +69,6 @@ async def trigger_error():
 
 
 @app.get("/api/links",
-        response_model=List[LinkResponse],
         status_code=status.HTTP_200_OK)
 async def get_links(response: Response, range: str = None):
     if range:
