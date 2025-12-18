@@ -5,11 +5,12 @@ import sentry_sdk
 from fastapi import FastAPI, Response, status
 from fastapi.middleware.cors import CORSMiddleware
 from sqlmodel import SQLModel
-from .models import LinkCreate 
+
 import config
 from repositories.LinkRepository import LinkRepository
 
 from .database import engine
+from .models import LinkCreate
 
 sentry_sdk.init(dsn=config.SENTRY_DSN,
     traces_sample_rate=1.0,

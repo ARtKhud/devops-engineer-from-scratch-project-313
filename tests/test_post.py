@@ -83,6 +83,7 @@ def test_create_link_returns_correct_structure():
         assert isinstance(data["short_name"], str)
         assert isinstance(data["short_url"], str)
 
+
 def test_create_with_invalid_value():
     request_data = {}
     with patch('app.server.repo'):
