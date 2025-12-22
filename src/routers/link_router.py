@@ -3,10 +3,10 @@ from fastapi import APIRouter, Depends, Response, status
 from src.schemas.link_schemas import LinkCreate, LinkUpdate
 from src.services import LinkService, get_link_service
 
-link_router = APIRouter(prefix="/api/links", tags=["links"])
+link_router = APIRouter(prefix="/api", tags=["links"])
 
 
-@link_router.get("/", status_code=status.HTTP_200_OK)
+@link_router.get("/links", status_code=status.HTTP_200_OK)
 async def get_links(
     response: Response,
     range: str | None = None,
@@ -23,7 +23,7 @@ async def get_links(
     return service.get_all_links(skip, limit)
 
 
-@link_router.post("/", status_code=status.HTTP_201_CREATED)
+@link_router.post("/links", status_code=status.HTTP_201_CREATED)
 async def create_link(
     link_creation_data: LinkCreate,
     service: LinkService = Depends(get_link_service),
@@ -31,7 +31,7 @@ async def create_link(
     return service.create_link(link_creation_data)
 
 
-@link_router.get("/{id}", status_code=status.HTTP_200_OK)
+@link_router.get("/links/{id}", status_code=status.HTTP_200_OK)
 async def get_link_by_id(
     id: int, service: LinkService = Depends(get_link_service)
 ):
@@ -39,7 +39,7 @@ async def get_link_by_id(
     return link
 
 
-@link_router.put("/{id}", status_code=status.HTTP_200_OK)
+@link_router.put("/links/{id}", status_code=status.HTTP_200_OK)
 async def update_link(
     id: int,
     link_updates: LinkUpdate,
@@ -49,7 +49,7 @@ async def update_link(
     return link
 
 
-@link_router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT)
+@link_router.delete("/links/{id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_link(
     id: int, service: LinkService = Depends(get_link_service)
 ):
