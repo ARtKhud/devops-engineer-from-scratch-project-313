@@ -3,6 +3,21 @@
 ### Project test and linter status:
 [![CI - Tests and Linting](https://github.com/ARtKhud/devops-engineer-from-scratch-project-313/actions/workflows/ci.yml/badge.svg)](https://github.com/ARtKhud/devops-engineer-from-scratch-project-313/actions/workflows/ci.yml)
 
+## Description
+### URL Shortener — DevOps Practice Project
+    Простой CRUD-сервис для сокращения ссылок, развернутый на платформе Render (PaaS). Основная цель проекта — отработка ключевых DevOps-практик на реальном примере.
+
+## Функциональность
+   - Backend: FastAPI (Python 3.11+)
+
+   - База данных: PostgreSQL
+
+   - Контейнеризация: Docker + Docker Compose
+
+   - Деплой: Render PaaS
+
+   - CI/CD: GitHub Actions / Render Blueprint
+
 ### Links
 
 This project was built using these tools:

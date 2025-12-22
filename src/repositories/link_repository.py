@@ -1,12 +1,13 @@
 from typing import Optional, Sequence
 
 from fastapi import Depends
-from sqlalchemy.orm import Session
 from sqlalchemy import func, select
-from src.database import get_db
-from src.schemas import LinkCreate
-from src.models import Link
+from sqlalchemy.orm import Session
+
 from src.config import settings
+from src.database import get_db
+from src.models import Link
+from src.schemas import LinkCreate
 from src.schemas.link_schemas import LinkUpdate
 
 BASE_URL = settings.BASE_URL

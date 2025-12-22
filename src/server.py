@@ -6,7 +6,6 @@ from fastapi.middleware.cors import CORSMiddleware
 import src.config as config
 from src.routers import link_router, root_router
 
-
 from .database import db_init, dispose
 
 

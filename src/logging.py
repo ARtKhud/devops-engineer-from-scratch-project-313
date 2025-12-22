@@ -1,8 +1,8 @@
 import logging
+
 import sentry_sdk
 
 from src.config import settings
-
 
 sentry_sdk.init(
     dsn=settings.SENTRY_DSN,

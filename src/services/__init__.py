@@ -1,3 +1,3 @@
-from .link_service import get_link_service, LinkService
+from .link_service import LinkService, get_link_service
 
 __all__ = ["get_link_service", "LinkService"]

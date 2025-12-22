@@ -1,10 +1,10 @@
 from unittest.mock import Mock
 
-from src.services import get_link_service
 from fastapi import HTTPException
 from fastapi.testclient import TestClient
 
 from src.server import app
+from src.services import get_link_service
 
 client = TestClient(app)
 

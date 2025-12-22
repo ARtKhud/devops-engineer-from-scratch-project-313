@@ -21,7 +21,7 @@ def test_get_links():
     mock_service.get_all_links.return_value = mock_links
     app.dependency_overrides[get_link_service] = lambda: mock_service
     try:
-        response = client.get(f"/api/links")
+        response = client.get("/api/links")
         assert response.status_code == 200
         assert response.json() == mock_links
     finally:
@@ -51,11 +51,29 @@ def test_get_link_by_id_success():
 
 def test_get_link_by_id_different_ids():
     test_cases = [
-        (1, {"id": 1, "original_url": "https://test1.com", "short_name": "test1"}),
-        (42, {"id": 42, "original_url": "https://test42.com", "short_name": "test42"}),
+        (
+            1,
+            {
+                "id": 1,
+                "original_url": "https://test1.com",
+                "short_name": "test1",
+            },
+        ),
+        (
+            42,
+            {
+                "id": 42,
+                "original_url": "https://test42.com",
+                "short_name": "test42",
+            },
+        ),
         (
             999,
-            {"id": 999, "original_url": "https://test999.com", "short_name": "test999"},
+            {
+                "id": 999,
+                "original_url": "https://test999.com",
+                "short_name": "test999",
+            },
         ),
     ]
     mock_service = Mock()

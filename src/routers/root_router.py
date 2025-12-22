@@ -4,7 +4,7 @@ from src.logging import get_logging
 
 logger = get_logging(__name__)
 
-root_router = APIRouter(prefix="/api", tags=["root"])
+root_router = APIRouter(tags=["root"])
 
 
 @root_router.get("/")
