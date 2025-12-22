@@ -44,15 +44,16 @@ class LinkRepository:
         return link
 
     def update_link(self, id: int, link_updates: LinkUpdate) -> Optional[Link]:
-        upadeting_link = self.find_link_by_id(id)
-        if not upadeting_link:
+        up_link = self.find_link_by_id(id)
+        if not up_link:
             return None
         for key, value in link_updates.model_dump().items():
-            setattr(upadeting_link, key, value)
-        self.session.add(upadeting_link)
+            setattr(up_link, key, value)
+        up_link.short_url = f"{up_link.original_url}/r/{up_link.short_name}"
+        self.session.add(up_link)
         self.session.commit()
-        self.session.refresh(upadeting_link)
-        return upadeting_link
+        self.session.refresh(up_link)
+        return up_link
 
     def delete_link(self, id: int) -> None:
         stmt = select(Link).where(Link.id == id)

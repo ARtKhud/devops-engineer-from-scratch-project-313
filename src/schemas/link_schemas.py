@@ -17,7 +17,6 @@ class LinkCreate(LinkBase):
         ...,
         description="Original url",
         min_length=3,
-        # max_length=10,
     )
 
 
@@ -26,13 +25,11 @@ class LinkUpdate(BaseModel):
         default=None,
         description="Original url",
         min_length=3,
-        # max_length=10,
     )
     short_name: Optional[str] = Field(
         default=None,
         description="Short name",
         min_length=3,
-        # max_length=20,
     )
 
 
