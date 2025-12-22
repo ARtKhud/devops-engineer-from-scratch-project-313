@@ -5,7 +5,6 @@ from fastapi.middleware.cors import CORSMiddleware
 
 import src.config as config
 from src.routers import link_router, root_router
-
 from .database import db_init, dispose
 
 
@@ -13,7 +12,8 @@ from .database import db_init, dispose
 async def lifespan(app: FastAPI):
     try:
         db_init()
-    except Exception:
+    except Exception as e:
+        print(f"Error during db_init: {e}")
         raise
     yield
     dispose()

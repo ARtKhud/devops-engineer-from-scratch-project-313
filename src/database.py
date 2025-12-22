@@ -1,7 +1,8 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import DeclarativeBase, declarative_base, sessionmaker
+from sqlalchemy.orm import sessionmaker
 
 from src.config import settings
+from src.models.base_model import Base
 
 engine = create_engine(
     settings.DATABASE_URL,
@@ -11,7 +12,6 @@ engine = create_engine(
 )
 
 SessionLocal = sessionmaker(autoflush=False, bind=engine)
-Base: DeclarativeBase = declarative_base()
 
 
 def get_db():
