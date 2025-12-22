@@ -28,7 +28,6 @@ class LinkService:
             return LinkResponse.model_validate(link)
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Short name '{lcd.short_name}' already exists",
         )
 
     def get_link_by_id(self, id: int) -> LinkResponse:
@@ -36,7 +35,6 @@ class LinkService:
         if not link:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
-                detail="Not Found",
             )
         return LinkResponse.model_validate(link)
 
@@ -45,7 +43,6 @@ class LinkService:
         if not link:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
-                detail="Not Found",
             )
         return LinkResponse.model_validate(link)
 
@@ -53,6 +50,7 @@ class LinkService:
         return self.repo.get_total()
 
     def delete_link(self, id: int) -> None:
+        self.get_link_by_id(id)
         self.repo.delete_link(id)
 
 
