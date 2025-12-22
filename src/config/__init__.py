@@ -11,3 +11,4 @@ configs = {
 }
 
 settings: DevelopmentConfig | ProductionConfig = configs[ENVIRONMENT]()
+print(ENVIRONMENT, settings.DATABASE_URL)
