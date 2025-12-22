@@ -23,7 +23,7 @@ class LinkRepository:
         return links
 
     def create_link(self, link: LinkCreate) -> Link:
-        short_url = f"{BASE_URL}/r/{link.short_name}"
+        short_url = f"{BASE_URL}{link.short_name}"
         created_link = Link(
             **link.model_dump(),
             short_url=short_url,

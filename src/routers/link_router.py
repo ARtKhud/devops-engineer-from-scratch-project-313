@@ -15,6 +15,7 @@ async def get_links(
     if not range:
         return service.get_all_links()
     start_str, end_str = map(int, range.strip("[]").split(","))
+    print(start_str, end_str)
     skip, limit = start_str, end_str - start_str + 1
     total_count = service.get_total()
     response.headers["Content-Range"] = (
